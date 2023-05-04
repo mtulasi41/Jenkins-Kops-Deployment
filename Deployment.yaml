@@ -1,0 +1,22 @@
+kind: Deployment
+metadata:
+  name: kops-deployment
+  labels:
+    app: kopsimage
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: kopsimage
+  template:
+    metadata:
+      labels:
+        app: kopsimage
+    spec:
+      containers:
+      - name: kopsimage
+        image: chtulasi/kopsimage:latest
+        ports:
+        - containerPort: 80
+  imagePullSecrets:
+  - name: regcred
